@@ -14,10 +14,10 @@ function createYesButton() {
     // Add button to the body
     body.appendChild(yesButton);
     
-    // Click event on any "Yes" button to reveal the surprise
-    yesButton.addEventListener('click', () => {
-        alert('Yay! You said YES! 💖');
-        window.location.reload();  // Reset the page for fun
+    // Click event on any "Yes" button to create heart explosion
+    yesButton.addEventListener('click', (event) => {
+        createHeartExplosion(event.clientX, event.clientY);
+        setTimeout(() => alert('Yay! You said YES! 💖'), 500);
     });
 }
 
@@ -27,3 +27,26 @@ noButton.addEventListener('click', () => {
         createYesButton();
     }
 });
+
+// Function to create heart explosion at the given (x, y) position
+function createHeartExplosion(x, y) {
+    for (let i = 0; i < 15; i++) {  // Create 15 hearts for the explosion
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+
+        // Random direction for the heart to explode
+        const angle = (Math.PI * 2 * i) / 15;
+        heart.style.setProperty('--x', Math.cos(angle));
+        heart.style.setProperty('--y', Math.sin(angle));
+
+        // Set the initial position of the heart near the button
+        heart.style.left = `${x}px`;
+        heart.style.top = `${y}px`;
+
+        // Add the heart to the body
+        body.appendChild(heart);
+
+        // Remove the heart after the animation ends
+        setTimeout(() => heart.remove(), 1500);
+    }
+}
