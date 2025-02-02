@@ -1,5 +1,6 @@
 const noButton = document.querySelector('.no-btn');
 const body = document.querySelector('body');
+const popupMessage = document.querySelector('#popup-message');
 
 // Function to create random "Yes" buttons
 function createYesButton() {
@@ -15,9 +16,9 @@ function createYesButton() {
     body.appendChild(yesButton);
     
     // Click event on any "Yes" button to create heart explosion
-    yesButton.addEventListener('click', (event) => {
+    yesButton.addEventListener('click', () => {
         createHeartExplosion(event.clientX, event.clientY);
-        setTimeout(() => alert('Yay! You said YES! 💖'), 500);
+        showPopup();
     });
 }
 
@@ -28,9 +29,9 @@ noButton.addEventListener('click', () => {
     }
 });
 
-// Function to create heart explosion at the given (x, y) position
+// Function to create heart explosion (same as before)
 function createHeartExplosion(x, y) {
-    for (let i = 0; i < 15; i++) {  // Create 15 hearts for the explosion
+    for (let i = 0; i < 15; i++) {
         const heart = document.createElement('div');
         heart.classList.add('heart');
 
@@ -49,4 +50,14 @@ function createHeartExplosion(x, y) {
         // Remove the heart after the animation ends
         setTimeout(() => heart.remove(), 1500);
     }
+}
+
+// Function to show the pop-up message
+function showPopup() {
+    popupMessage.classList.add('show');
+
+    // Hide the pop-up after 3 seconds
+    setTimeout(() => {
+        popupMessage.classList.remove('show');
+    }, 3000);
 }
