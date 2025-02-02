@@ -8,10 +8,10 @@ function createYesButton() {
     yesButton.classList.add('yes-flood');
     
     // Random positioning on the screen
-    yesButton.style.left = Math.random() * window.innerWidth + 'px';
-    yesButton.style.top = Math.random() * window.innerHeight + 'px';
+    yesButton.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    yesButton.style.top = Math.random() * (window.innerHeight - 50) + 'px';
     
-    // Add button to the body and animate
+    // Add button to the body
     body.appendChild(yesButton);
     
     // Click event on any "Yes" button to reveal the surprise
@@ -23,7 +23,7 @@ function createYesButton() {
 
 // Event listener for the "No" button
 noButton.addEventListener('click', () => {
-    for (let i = 0; i < 15; i++) {  // Create multiple "Yes" buttons
+    for (let i = 0; i < 10; i++) {  // Create multiple "Yes" buttons
         createYesButton();
     }
 });
