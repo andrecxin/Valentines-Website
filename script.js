@@ -1,13 +1,29 @@
-window.onload = function () {
-    const revealButton = document.querySelector('.yes-btn');
-    const surpriseBox = document.querySelector('#surprise');
+const noButton = document.querySelector('.no-btn');
+const body = document.querySelector('body');
 
-    revealButton.addEventListener('click', (event) => {
-        event.preventDefault();  // Prevent any unwanted behavior
-
-        // Reveal the hidden surprise box
-        surpriseBox.classList.remove('hidden');
-        surpriseBox.style.opacity = "1";
-        surpriseBox.style.transform = "scale(1)";
+// Function to create random "Yes" buttons
+function createYesButton() {
+    const yesButton = document.createElement('button');
+    yesButton.innerText = 'Yes 💘';
+    yesButton.classList.add('yes-flood');
+    
+    // Random positioning on the screen
+    yesButton.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    yesButton.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+    
+    // Add button to the body
+    body.appendChild(yesButton);
+    
+    // Click event on any "Yes" button to reveal the surprise
+    yesButton.addEventListener('click', () => {
+        alert('Yay! You said YES! 💖');
+        window.location.reload();  // Reset the page for fun
     });
-};
+}
+
+// Event listener for the "No" button
+noButton.addEventListener('click', () => {
+    for (let i = 0; i < 10; i++) {  // Create multiple "Yes" buttons
+        createYesButton();
+    }
+});
